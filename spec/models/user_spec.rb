@@ -2,11 +2,12 @@
 #
 # Table name: users
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  id              :integer         not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime        not null
+#  updated_at      :datetime        not null
+#  password_digest :string(255)
 #
 
 require 'spec_helper'
@@ -69,6 +70,16 @@ describe User do
       user_with_same_email.save
     end
     it { should_not be_valid }
+  end
+  
+  describe "when email is not lower case" do
+    let(:mixed_case_email) { "FooBar@ExAmPle.orG"}
+    
+    it "should be saved as all lower-case" do
+      @user.email = mixed_case_email
+      @user.save
+      @user.reload.email.should == mixed_case_email.downcase
+    end
   end
   
   describe "when password is not present" do
