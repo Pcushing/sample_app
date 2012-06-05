@@ -27,6 +27,8 @@ module SessionsHelper
     click_button "Sign in"
   end
   
+  # This likely doesn't make sense in this spot.  The other functions seem to have more of a purpose than this, 
+  # but I wanted to play around to see what was possible.
   def fill_in_info
     fill_in "Name",         with: "Example User"
     fill_in "Email",        with: "user@example.com"
