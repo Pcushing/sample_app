@@ -15,6 +15,10 @@ module SessionsHelper
   def current_user
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
   end
+
+  def current_user?(user)
+    user == current_user
+  end
   
   def sign_out
     current_user = nil
@@ -27,13 +31,13 @@ module SessionsHelper
     click_button "Sign in"
   end
   
-  # This likely doesn't make sense in this spot.  The other functions seem to have more of a purpose than this, 
-  # but I wanted to play around to see what was possible.
-  def fill_in_info
-    fill_in "Name",         with: "Example User"
-    fill_in "Email",        with: "user@example.com"
-    fill_in "Password",     with: "foobar"
-    fill_in "Confirmation", with: "foobar"
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+  def store_location
+    session[:return_to] = request.fullpath
   end
   
 end
