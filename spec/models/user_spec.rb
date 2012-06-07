@@ -37,12 +37,6 @@ describe User do
   it { should be_valid }
   it { should_not be_admin }
 
-  # Come back to this later this week, chapter 9 exercise 1.  This isn't right, needs work.
-  # describe "accessible attributes" do
-  #   it "should not allow access to admin" do
-  #     it { should_not respond_to(:admin) }
-  #   end
-  # end
 
   describe "with admin attribute set to 'true'" do
     before { @user.toggle!(:admin) }
