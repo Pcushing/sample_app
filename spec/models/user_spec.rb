@@ -37,11 +37,25 @@ describe User do
   it { should be_valid }
   it { should_not be_admin }
 
-
+  # Exercise 1 from chapter 9
+  describe "accessible attributes" do
+    it "should not allow access to admin" do 
+      expect do
+        User.new(admin: @user.admin)
+      end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
+    end
+  end
+  
   describe "with admin attribute set to 'true'" do
     before { @user.toggle!(:admin) }
-
     it { should be_admin }
+    
+    #This already passes but it shouldn't.  I haven't done anything yet, and there's no way this test is correct.
+    it "shouldnt be able to delete self" do
+      expect do
+        self.destroy
+      end.should raise_error
+    end
   end
   
   describe "remember token" do

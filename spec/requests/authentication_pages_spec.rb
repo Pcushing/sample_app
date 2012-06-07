@@ -15,6 +15,9 @@ describe "Authentication" do
       
       it { should have_selector('h1',   text: 'Sign in') }
       it { should have_error_message('Invalid') }
+      it { should_not have_selector('a', text: 'Profile') }
+      it { should_not have_selector('a', text: 'Settings') }
+      it { should_not have_selector('a', text: 'Sign out') }
     
       describe "after visiting another page" do
         before { click_link "Home" }
@@ -36,6 +39,12 @@ describe "Authentication" do
       describe "followed by signout" do
         before { click_link "Sign out" }
         it { should have_link('Sign in') }
+      end
+      
+      describe "followed by attempt to create new should redirect" do
+        before { visit signup_path }
+        it { should have_link('Profile') }
+        it { should_not have_link('Sign up now!')}
       end
     end  
   end
