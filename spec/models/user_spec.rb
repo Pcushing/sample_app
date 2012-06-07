@@ -29,6 +29,13 @@ describe User do
   it { should be_valid }
   it { should_not be_admin }
 
+  # # Exercise 1 from chapter 9
+  # describe "accessible attributes" do
+  #   it "should not allow access to admin" do 
+  #     @user.admin = true
+  #   end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
+  # end
+  
   describe "with admin attribute set to 'true'" do
     before { @user.toggle!(:admin) }
 
