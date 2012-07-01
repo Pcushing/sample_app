@@ -5,17 +5,25 @@
 		<title>Necessary?</title>
 	</head>
 	<body>
-	  <h1>Welcome to the Sample App, homie <%= @user.name %></h1>
+	  <h1>Who can send emails from a rails app now? This guy can.</h1>
 	  <p>
-	    You have successfully signed up to example.com
-	    with the email: <%= @user.email %>.<br/>
+	    It took a bit of grinding, but as a result, I better understand
+	 	heroku, heroku logs, setting up a sendgrid profile,
+		rails environments, rails configurations, etc.<br />
 	  </p>
 	  <p>
-	    To login to the site, just follow this link: <%= @url %>.
+		Being able to test w/ rspec is still a work in progress as my test is failing when I check 
+		the deliveries array. I tried setting the delivery_method to :test and 
+		:sendmail, etc.  Puts'ing the array from the mailer method in the controller
+		confirms it's empty, too.<br/>
 	  </p>
 	  <p>
-	    Really, though, let's focus on what's important.  Who can send emails
-		from a rails app now?  This guy.
+		And just for fun, here's the email you signed up with: <%= @user.email %>.<br/>
+	  </p>
+	  <p>
+	    What should I focus on next, John?  Obviously, the styling needs some work, 
+		but I assume there's going to be other intricacies to handle for a real
+		production site.
 	  </p>
 	</body>
 </html>
