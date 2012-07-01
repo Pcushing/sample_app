@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: relationships
+#
+#  id          :integer         not null, primary key
+#  follower_id :integer
+#  followed_id :integer
+#  created_at  :datetime        not null
+#  updated_at  :datetime        not null
+#
+
 require 'spec_helper'
 
 describe Relationship do
@@ -9,6 +20,23 @@ describe Relationship do
   subject { relationship }
 
   it { should be_valid }
+
+  # What's going on here?  I can't seem to get this test to pass to confirm deleting a user deletes their relationships
+  it "should destroy associated relationships" do
+    follower.destroy
+    relationships.each do |relationship|
+      Relationship.find_by(relationship.follower_id).should be_nil
+    end
+  end
+  
+  # Use as a guide for the above
+  # it "should destroy associated microposts" do
+  #   microposts = @user.microposts
+  #   @user.destroy
+  #   microposts.each do |micropost|
+  #     Micropost.find_by_id(micropost.id).should be_nil
+  #   end
+  # end
 
   describe "accessible attributes" do
     it "should not allow access to follower_id" do

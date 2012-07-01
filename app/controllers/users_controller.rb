@@ -21,13 +21,20 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       @user = User.new(params[:user])
-    
-      if @user.save
-        sign_in @user
-        flash[:success] = "Welcome to the Sample App!"
-        redirect_to @user
-      else
-        render 'new'
+      respond_to do |format|          
+        if @user.save
+          sign_in @user
+          flash[:success] = "Welcome to the Sample App!"
+          # redirect_to @user
+          # Tell the UserMailer to send a welcome Email after save
+          UserMailer.welcome_email(@user).deliver
+          format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+          format.json { render :json => @user, :status => :created, :location => @user }
+        else
+          # render 'new' this is here from before while a lot of this method is adapted now for the email send
+          format.html { render :action => "new" }
+          format.json { render :json => @user.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end

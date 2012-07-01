@@ -46,6 +46,7 @@ describe "Authentication" do
         it { should have_link('Profile') }
         it { should_not have_link('Sign up now!')}
       end
+      
     end  
   end
   

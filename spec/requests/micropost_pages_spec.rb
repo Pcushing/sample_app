@@ -42,4 +42,20 @@ describe "Micropost pages" do
       end
     end
   end
+  
+  describe "micropost pluralization" do
+    # Work in progress
+    describe "for 1 post" do
+      before { FactoryGirl.create(:micropost, user: user) }
+      before { visit root_path }
+      it { should have_content('micropost') }
+    end
+    
+    describe "for 2 posts" do
+        before { FactoryGirl.create(:micropost, user: user) }
+        before { FactoryGirl.create(:micropost, user: user) }
+        before { visit root_path }
+        it { should have_content('microposts') }
+    end
+  end
 end
