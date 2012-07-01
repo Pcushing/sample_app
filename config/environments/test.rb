@@ -42,7 +42,7 @@ SampleApp::Application.configure do
   end
   
   # Sends emails via sendmail... whatever that is
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
   # Defaults to:
   # config.action_mailer.sendmail_settings = {
   #   :location => '/usr/sbin/sendmail',
